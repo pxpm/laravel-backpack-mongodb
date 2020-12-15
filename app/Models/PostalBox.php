@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class PostalBox extends Model
 {
@@ -20,6 +20,7 @@ class PostalBox extends Model
     public $timestamps = false;
     // protected $guarded = ['id'];
     protected $fillable = ['monster_id', 'postal_name'];
+
 
     public function monster()
     {

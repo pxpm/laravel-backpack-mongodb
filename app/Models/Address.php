@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class Address extends Model
 {
@@ -21,6 +21,10 @@ class Address extends Model
     // protected $guarded = ['id'];
     protected $fillable = ['monster_id', 'street', 'country', 'icon_id'];
 
+    public $dates = [
+        'created_at', 'updated_at', 'deleted_at'
+    ];
+    
     public function monster()
     {
         return $this->belongsTo(\App\Models\Monster::class, 'monster_id');
@@ -30,4 +34,5 @@ class Address extends Model
     {
         return $this->belongsTo(\App\Models\Icon::class, 'icon_id');
     }
+
 }

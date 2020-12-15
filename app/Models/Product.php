@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class Product extends Model
 {
@@ -21,13 +21,17 @@ class Product extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];
-    protected $fillable = ['name', 'description', 'details', 'features', 'price', 'category_id', 'extras'];
+    protected $fillable = ['name', 'description', 'details', 'features', 'price', 'extras'];
     // protected $hidden = [];
     // protected $dates = [];
     public $translatable = ['name', 'description', 'details', 'features', 'extras'];
     public $casts = [
         'features'       => 'object',
         'extra_features' => 'object',
+    ];
+
+    public $dates = [
+        'created_at', 'updated_at', 'deleted_at'
     ];
 
     /*
@@ -41,11 +45,6 @@ class Product extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    public function category()
-    {
-        return $this->belongsTo('Backpack\NewsCRUD\app\Models\Category', 'category_id');
-    }
 
     /*
     |--------------------------------------------------------------------------

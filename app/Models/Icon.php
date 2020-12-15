@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 use Venturecraft\Revisionable\RevisionableTrait;
 
 class Icon extends Model
@@ -24,6 +24,10 @@ class Icon extends Model
     protected $fillable = ['name', 'icon'];
     // protected $hidden = [];
     // protected $dates = [];
+
+    public $dates = [
+        'created_at', 'updated_at', 'deleted_at'
+    ];
 
     public function identifiableName()
     {

@@ -25,43 +25,9 @@
 	// 
 	// But you do whatever you think it's best. Who am I, your mom?
 	$productCount = App\Models\Product::count();
-	$userCount = App\User::count();
-	$articleCount = \Backpack\NewsCRUD\app\Models\Article::count();
-	$lastArticle = \Backpack\NewsCRUD\app\Models\Article::orderBy('date', 'DESC')->first();
-	$lastArticleDaysAgo = \Carbon\Carbon::parse($lastArticle->date)->diffInDays(\Carbon\Carbon::today());
- 
+	$userCount = App\User::count(); 
  	// notice we use Widget::add() to add widgets to a certain group
 	Widget::add()->to('before_content')->type('div')->class('row')->content([
-		// notice we use Widget::make() to add widgets as content (not in a group)
-		Widget::make()
-			->type('progress')
-			->class('card border-0 text-white bg-primary')
-			->progressClass('progress-bar')
-			->value($userCount)
-			->description('Registered users.')
-			->progress(100*(int)$userCount/1000)
-			->hint(1000-$userCount.' more until next milestone.'),
-		// alternatively, to use widgets as content, we can use the same add() method,
-		// but we need to use onlyHere() or remove() at the end
-		Widget::add()
-		    ->type('progress')
-		    ->class('card border-0 text-white bg-success')
-		    ->progressClass('progress-bar')
-		    ->value($articleCount)
-		    ->description('Articles.')
-		    ->progress(80)
-		    ->hint('Great! Don\'t stop.')
-		    ->onlyHere(), 
-		// alternatively, you can just push the widget to a "hidden" group
-		Widget::make()
-			->group('hidden')
-		    ->type('progress')
-		    ->class('card border-0 text-white bg-warning')
-		    ->value($lastArticleDaysAgo.' days')
-		    ->progressClass('progress-bar')
-		    ->description('Since last article.')
-		    ->progress(30)
-		    ->hint('Post an article every 3-4 days.'),
 		// both Widget::make() and Widget::add() accept an array as a parameter
 		// if you prefer defining your widgets as arrays
 	    Widget::make([
@@ -114,34 +80,6 @@
 	  'heading'      => 'Demo Refreshes Every Hour on the Hour',
 	  'content'      => 'At hh:00, all custom entries are deleted, all files, everything. This cleanup is necessary because developers like to joke with their test entries, and mess with stuff. But you know that :-) Go ahead - make a developer smile.' ,
 	  'close_button' => true, // show close button or not
-	];
-
-    $widgets['before_content'][] = [
-	  'type' => 'div',
-	  'class' => 'row',
-	  'content' => [ // widgets 
-		  	[ 
-		        'type' => 'chart',
-		        'wrapperClass' => 'col-md-6',
-		        // 'class' => 'col-md-6',
-		        'controller' => \App\Http\Controllers\Admin\Charts\LatestUsersChartController::class,
-				'content' => [
-				    'header' => 'New Users Past 7 Days', // optional
-				    // 'body' => 'This chart should make it obvious how many new users have signed up in the past 7 days.<br><br>', // optional
-					
-		    	]
-	    	],
-	    	[ 
-		        'type' => 'chart',
-		        'wrapperClass' => 'col-md-6',
-		        // 'class' => 'col-md-6',
-		        'controller' => \App\Http\Controllers\Admin\Charts\NewEntriesChartController::class,
-				'content' => [
-				    'header' => 'New Entries', // optional
-				    // 'body' => 'This chart should make it obvious how many new users have signed up in the past 7 days.<br><br>', // optional
-		    	]
-	    	],
-    	]
 	];
 
     $widgets['after_content'][] = [

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 
 class Dummy extends Model
@@ -18,7 +18,7 @@ class Dummy extends Model
     */
 
     protected $table = 'dummies';
-    // protected $primaryKey = 'id';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
     // protected $fillable = [];
@@ -26,6 +26,10 @@ class Dummy extends Model
     // protected $dates = [];
     protected $casts = [
         'extras' => 'array',
+    ];
+
+    public $dates = [
+        'created_at', 'updated_at', 'deleted_at'
     ];
 
     /*

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -35,6 +35,10 @@ class Monster extends Model
         // 'select2_from_array'    => 'array'
     ];
 
+    public $dates = [
+        'created_at', 'updated_at', 'deleted_at'
+    ];
+    
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS

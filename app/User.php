@@ -4,7 +4,7 @@ namespace App;
 
 use Alert;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
